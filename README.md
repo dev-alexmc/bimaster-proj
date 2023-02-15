@@ -99,10 +99,47 @@ Os dados foram persistidos sem os valores inválidos (NaN), e com o nome do índ
 ## Detecção de Anomalias
 
 ### Via métodos estatísticos
-FIXME: continuar daqui.
+
+Arquivo: [ibc_br_da_metodos_estatisticos.ipynb](ibc_br_da_metodos_estatisticos.ipynb)
+
+Para o processo de análise estatística dos dados, analisamos os seguintes dados:
+* [Série IBC-BR](dados/serie_ibcbr.csv).
+* [Resíduos da série IBC-BR](dados/serie_ibcbr_residuo.csv).
+* [Série de diferenças](dados/serie_ibcbr_diferencas.csv).
+* [Resíduos da série de diferenças](dados/serie_ibcbr_diferencas_residuo.csv).
+
+Seguimos o seguinte processo para realizar a análise estatística dos dados:
+1. Carregamos e verificamos dos dados de cada série temporal.
+2. Calculamos o z-score modificado de cada entrada dos resíduos da série IBC-BR.
+3. Analisamos os dados de z-score modificado obtidos para as entradas.
+3. Filtramos os dados dos resíduos da série IBC-BR de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD (sigla em inglês para o desvio absoluto mediano).
+
+      ![Anomalias encontradas nos resíduos da série IBC-BR via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_res_filtrados_zscore_modificado.png)
+      
+      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de resíduos via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_res_filtrados_zscore_modificado_grafico.png)
+      
+      O processo detectou anomalias em 2008 e 2009 (potenciais efeitos da crise do mercado financeiro mundial de 2008) e também encontrou anomalias entre dezembro de 2019 até junho de 2020 (potenciais efeitos da pandemia de COVID-19).
+4. Calculamos o z-score modificado de cada entrada da série de diferenças.
+5. Analisamos os dados de z-score modificado obtidos para as entradas.
+6. Filtramos os dados da série de diferenças de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD.
+
+      ![Anomalias encontradas nos resíduos da série de diferenças com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado.png)
+      
+      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_grafico.png)
+7. Filtramos os dados da série de diferenças de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 3.5 unidades de MAD.
+
+      ![Anomalias encontradas nos resíduos da série de diferenças com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5.png)
+      
+      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via z-score modificado com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5_grafico.png)
+
+      As anomalias encontradas analisando apenas a série de diferenças são muito diferentes das anomalias que entendemos existirem nos dados. Verificamos que os valores das diferenças, apesar de serem uma série estacionária, ainda carregam em si a modulação da tendência e da sazonalidade e isso influencia grandemente a série. 
+      
+      Avaliamos que a detecção de anomalias em uma série de diferenças é útil para detectar grandes variações entre valores consecutivos da série, mas não apresentou um desempenho bom para detectar anomalias no escopo semântico da série (momentos em que a série se comportou de maneira inesperada com relação à sua proposta), quando comparamos os resultados obtidos com o z-score modificado.
 
 ### Via predição de séries
+
+Arquivo: [ibc_br_da_predicao_de_series.ipynb](ibc_br_da_predicao_de_series.ipynb)
 FIXME: continuar daqui.
 
-### Via métodos de classificação
-FIXME: continuar daqui.
+## Conclusão
+
