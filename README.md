@@ -128,12 +128,12 @@ O seguinte processo foi seguido para realizar a detecção de anomalias com o m�
 5. Analisamos os dados de z-score modificado obtidos para as entradas.
 6. Filtramos os dados da série de diferenças de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD.
 
-      ![Anomalias encontradas nos resíduos da série de diferenças com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado.png)
+      ![Anomalias encontradas na série de diferenças com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado.png)
       
       ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_grafico.png)
 7. Filtramos os dados da série de diferenças de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 3.5 unidades de MAD.
 
-      ![Anomalias encontradas nos resíduos da série de diferenças com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5.png)
+      ![Anomalias encontradas na série de diferenças com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5.png)
       
       ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via z-score modificado com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5_grafico.png)
 
@@ -149,9 +149,11 @@ O seguinte processo foi seguido para realizar a detecção de anomalias com o m�
 2. Analisamos o resultado e readequamos o limiar para 0.8 unidades.
 3. Obtivemos o conjunto de anomalias com o limiar de 0.8 unidades.
 
-      ![Anomalias encontradas nos resíduos da série de diferenças com limiar 0.8](imagens/analise_estatistica_ibc-br_diferencas_filtrados_cumsum.png)
+      ![Anomalias encontradas nos resíduos da série IBC-BR com limiar 0.8](imagens/analise_estatistica_ibc-br_diferencas_filtrados_cumsum.png)
 
-      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via CUMSUM com limiar 0.8](imagens/analise_estatistica_ibc-br_diferencas_filtrados_cumsum_grafico.png)
+      ![Gráfico da série IBC-BR original com as anomalias identificadas nos resíduos da série IBC-BR via CUMSUM com limiar 0.8](imagens/analise_estatistica_ibc-br_diferencas_filtrados_cumsum_grafico.png)
+
+      A série de diferenças não foi analisada via o método CUMSUM, pois a análise via o método _z-score_ modificado revelou que os dados nela contidos não apresentavam as anomalias nas quais estávamos interessados.
 
       Das cinco anomalias encontradas via o método CUMSUM com limiar 0.8, quatro delas também foram detectadas pelo método z-score modificado, que encontrou um total de 10 anomalias com limiar 2.5 unidades.  
 
