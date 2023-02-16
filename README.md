@@ -1,9 +1,10 @@
 # Projeto final do curso BI-MASTER 2020-2.
 Repositório: bimaster-proj  
-Autor: Alex M. Campos
+Autor: Alex Marques Campos
+Matrícula: 202190054
 
 ## Descrição
-O presente projeto tem como finalidade servir como projeto de final do curso BI-MASTER, da turma 2020-2, para o aluno Alex M. Campos.
+O presente projeto tem como finalidade servir como projeto de final do curso BI-MASTER, da turma 2020-2, para o aluno Alex Marques Campos.
 A proposta do projeto é realizar uma atividade de análise de anomalias em uma série história com poucas amostras, para explorar a dificuldade da análise em uma série deste tipo e as ferramentas que podem ser utilizadas para a detecção de anomalias. A hipótese é que a detecção de anomalias seria feita em um processo batch, dado que série possui uma baixa frequência, mas também exploraremos abordagens para permitir estabelecer um processo de deteção de anomalias 'stream-like'.
 
 ## Sobre a série temporal escolhida
@@ -108,10 +109,14 @@ Para o processo de análise estatística dos dados, analisamos os seguintes dado
 * [Série de diferenças](dados/serie_ibcbr_diferencas.csv).
 * [Resíduos da série de diferenças](dados/serie_ibcbr_diferencas_residuo.csv).
 
-Seguimos o seguinte processo para realizar a análise estatística dos dados:
-1. Carregamos e verificamos dos dados de cada série temporal.
-2. Calculamos o z-score modificado de cada entrada dos resíduos da série IBC-BR.
-3. Analisamos os dados de z-score modificado obtidos para as entradas.
+Iniciamos o processo carregando e verificando os dados de cada uma das séries temporais.
+
+#### Método: _z-score_ modificado
+
+O seguinte processo foi seguido para realizar a detecção de anomalias com o método _z-score_ modificado.
+
+1. Calculamos o z-score modificado de cada entrada dos resíduos da série IBC-BR.
+2. Analisamos os dados de z-score modificado obtidos para as entradas.
 3. Filtramos os dados dos resíduos da série IBC-BR de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD (sigla em inglês para o desvio absoluto mediano).
 
       ![Anomalias encontradas nos resíduos da série IBC-BR via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_res_filtrados_zscore_modificado.png)
@@ -135,6 +140,20 @@ Seguimos o seguinte processo para realizar a análise estatística dos dados:
       As anomalias encontradas analisando apenas a série de diferenças são muito diferentes das anomalias que entendemos existirem nos dados. Verificamos que os valores das diferenças, apesar de serem uma série estacionária, ainda carregam em si a modulação da tendência e da sazonalidade e isso influencia grandemente a série. 
       
       Avaliamos que a detecção de anomalias em uma série de diferenças é útil para detectar grandes variações entre valores consecutivos da série, mas não apresentou um desempenho bom para detectar anomalias no escopo semântico da série (momentos em que a série se comportou de maneira inesperada com relação à sua proposta), quando comparamos os resultados obtidos com o z-score modificado.
+
+#### Método: CUMSUM (somas cumulativas)
+
+O seguinte processo foi seguido para realizar a detecção de anomalias com o método CUMSUM.
+
+1. Calculamos as somas altas e as somas baixas da série de resíduos da série IBC-BR, usando o método CUMSUM, com um limiar inicial de 2.5 unidades.
+2. Analisamos o resultado e readequamos o limiar para 0.8 unidades.
+3. Obtivemos o conjunto de anomalias com o limiar de 0.8 unidades.
+
+      ![Anomalias encontradas nos resíduos da série de diferenças com limiar 0.8](imagens/analise_estatistica_ibc-br_diferencas_filtrados_cumsum.png)
+
+      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via CUMSUM com limiar 0.8](imagens/analise_estatistica_ibc-br_diferencas_filtrados_cumsum_grafico.png)
+
+      Das cinco anomalias encontradas via o método CUMSUM com limiar 0.8, quatro delas também foram detectadas pelo método z-score modificado, que encontrou um total de 10 anomalias com limiar 2.5 unidades.  
 
 ### Via predição de séries
 
