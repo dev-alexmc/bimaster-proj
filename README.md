@@ -115,52 +115,87 @@ Iniciamos o processo carregando e verificando os dados de cada uma das séries t
 
 O seguinte processo foi seguido para realizar a detecção de anomalias com o método _z-score_ modificado.
 
-1. Calculamos o z-score modificado de cada entrada dos resíduos da série IBC-BR.
-2. Analisamos os dados de z-score modificado obtidos para as entradas.
-3. Filtramos os dados dos resíduos da série IBC-BR de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD (sigla em inglês para o desvio absoluto mediano).
+1. Calculamos o z-score modificado de cada entrada dos resíduos da __série IBC-BR__.
+2. Analisamos os dados de z-score modificado obtidos para as entradas da __série IBC-BR__.
+3. Filtramos os dados dos resíduos da __série IBC-BR__ de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD (sigla em inglês para o desvio absoluto mediano).
 
       ![Anomalias encontradas nos resíduos da série IBC-BR via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_res_filtrados_zscore_modificado.png)
       
       ![Gráfico da série IBC-BR original com as anomalias identificadas na série de resíduos via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_res_filtrados_zscore_modificado_grafico.png)
       
       O processo detectou anomalias em 2008 e 2009 (potenciais efeitos da crise do mercado financeiro mundial de 2008) e também encontrou anomalias entre dezembro de 2019 até junho de 2020 (potenciais efeitos da pandemia de COVID-19).
-4. Calculamos o z-score modificado de cada entrada da série de diferenças.
-5. Analisamos os dados de z-score modificado obtidos para as entradas.
-6. Filtramos os dados da série de diferenças de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD.
+4. Para compararmos os resultados com outra abordagem, calculamos o z-score modificado de cada entrada da __série de diferenças__.
+5. Analisamos os dados de z-score modificado obtidos para as entradas da __série de diferenças__.
+6. Filtramos os dados da __série de diferenças__ de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD.
 
       ![Anomalias encontradas na série de diferenças com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado.png)
       
       ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_grafico.png)
-7. Filtramos os dados da série de diferenças de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 3.5 unidades de MAD.
+7. Para entender melhor as anomalias encontradas, filtramos os dados da __série de diferenças__ de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 3.5 unidades de MAD, de forma que menos anomalias fossem indicadas.
 
       ![Anomalias encontradas na série de diferenças com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5.png)
       
       ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via z-score modificado com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5_grafico.png)
 
-      As anomalias encontradas analisando apenas a série de diferenças são muito diferentes das anomalias que entendemos existirem nos dados. Verificamos que os valores das diferenças, apesar de serem uma série estacionária, ainda carregam em si a modulação da tendência e da sazonalidade e isso influencia grandemente a série. 
+      As anomalias encontradas analisando apenas a série de diferenças são muito diferentes das anomalias que entendemos existirem nos dados. Verificamos que a série de diferenças, apesar de ser uma série estacionária, ainda carrega em si a modulação da sazonalidade e isso é refletido nas em grandes diferenças entre valores consecutivos, o que influencia o processo de detecção de anomalias. 
       
-      Avaliamos que a detecção de anomalias em uma série de diferenças é útil para detectar grandes variações entre valores consecutivos da série, mas não apresentou um desempenho bom para detectar anomalias no escopo semântico da série (momentos em que a série se comportou de maneira inesperada com relação à sua proposta), quando comparamos os resultados obtidos com o z-score modificado.
+      Avaliamos que o processo de detecção de anomalias na série de diferenças é útil para detectar grandes variações entre valores consecutivos da série, mas não se mostrou tão útil para detectar anomalias no escopo semântico da série (momentos em que a série se comportou de maneira inesperada com relação à sua proposta), quando comparamos os resultados obtidos com o z-score modificado na série de resíduos.
 
 #### Método: CUMSUM (somas cumulativas)
 
 O seguinte processo foi seguido para realizar a detecção de anomalias com o método CUMSUM.
 
-1. Calculamos as somas altas e as somas baixas da série de resíduos da série IBC-BR, usando o método CUMSUM, com um limiar inicial de 2.5 unidades.
-2. Analisamos o resultado e readequamos o limiar para 0.8 unidades.
-3. Obtivemos o conjunto de anomalias com o limiar de 0.8 unidades.
+1. Calculamos as somas altas e as somas baixas da __série de resíduos da série IBC-BR__, usando o método CUMSUM, com um limiar inicial de 2.5 unidades.
+2. Analisamos o resultado e readequamos o limiar para 0.8 unidades para as somas altas e baixas.
+3. Obtivemos o conjunto de anomalias com o limiar de 0.8 unidades para as somas altas e baixas.
 
       ![Anomalias encontradas nos resíduos da série IBC-BR com limiar 0.8](imagens/analise_estatistica_ibc-br_diferencas_filtrados_cumsum.png)
 
       ![Gráfico da série IBC-BR original com as anomalias identificadas nos resíduos da série IBC-BR via CUMSUM com limiar 0.8](imagens/analise_estatistica_ibc-br_diferencas_filtrados_cumsum_grafico.png)
 
-      A série de diferenças não foi analisada via o método CUMSUM, pois a análise via o método _z-score_ modificado revelou que os dados nela contidos não apresentavam as anomalias nas quais estávamos interessados.
+      A série de diferenças não foi analisada via o método CUMSUM, pois a análise desta série via o método _z-score_ modificado revelou que os dados nela contidos não apresentavam as anomalias nas quais estávamos interessados.
 
       Das cinco anomalias encontradas via o método CUMSUM com limiar 0.8, quatro delas também foram detectadas pelo método z-score modificado, que encontrou um total de 10 anomalias com limiar 2.5 unidades.  
 
-### Via predição de séries
+### Via predição de séries com modelo LSTM
 
 Arquivo: [ibc_br_da_predicao_de_series.ipynb](ibc_br_da_predicao_de_series.ipynb)
-FIXME: continuar daqui.
+
+Nesta seção, apresentamos uma abordagem diferente para a detecção de anomalias em séries temporais, através do uso de um modelo de inteligência artificial para realizar a predição de valores da série temporal. O racional é que um modelo treinado com dados regulares da série temporal (valores que não representem anomalias) prediria valores regulares para momentos onde anomalias ocorressem. Quando um valor anômalo ocorresse na série, o modelo apresentaria um erro muito grande quando comparássemos o valor previsto e o valor real e isso seria o indicativo que uma anomalia ocorreu.
+
+O modelo proposto para esse processo é uma rede neural com camadas LSTM (_Long Short Term Memory_), uma arquitetura de rede neural recorrente (RNN, do _inglês recurrent neural network_) que _costuma_ apresentar bom desempenho em tarefas de predição de séries temporais.
+
+O processo seguido foi o descrito abaixo:
+
+1. Carregamos e verificamos os dados da [série IBC-BR](dados/serie_ibcbr.csv).
+2. Normalizamos os valores, para evitar que o modelo fosse influenciado por grandes valores absolutos (mas também fizemos testes com os dados originais, sem estarem normalizados).
+3. Separamos os dados em conjuntos usando janelas deslizantes e também um valor alvo, o imediatamente após o final da janela - este é o valor a ser previsto pelo modelo.
+4. Separamos os dados em conjuntos de treinamento, validação e testes.
+5. Criamos um modelo LSTM e o treinamos usando os dados de treinamento, validação e testes.
+
+      ![Histórico de treinamento do modelo LSTM](imagens/analise_predicao_serie_lstm_hist_treinamento.png)
+
+      Durante o treinamento, monitoramos o desempenho das predições realizadas pelo modelo frente ao conjunto de validação e ajustamos automaticamente a taxa de aprendizado, para refinar os resultados. O processo também foi interrompido antes do final do total de épocas quando o erro estabilizou. A métrica utilizada para calcular o erro da função objetivo foi o MSE (_mean squared error_).
+
+6. Verificamos, pelo histórico de treinamento se houve ou não __over training__.
+7. Analisamos a relação entre os valores previstos e os valores reais para os conjuntos de treinamento, validação e testes.
+
+      ![Comparativo entre valor previsto e o valor real para os conjuntos de treino, validação e teste](imagens/analise_predicao_serie_lstm_pred_vs_real_treino_validacao_teste.png)
+
+      Nessa análise, os pontos pareciam bastante próximos à reta x = y.
+
+8. Calculamos e avaliamos o erro encontrado no modelo usando as métricas MSE (que também foi usada para nortear o treinamento), RMSE (_root mean squared error_), MAPE (_Mean Absolute Percentual Error_), R^2 score e R^2 ajustado. 
+
+      |     Métrica de Erro | Train |  Val  | Test  |
+      |                 MSE | 0.09  | 0.17  | 0.14  |
+      |                RMSE | 0.31  | 0.41  | 0.38  |
+      |                MAPE | 0.64% | 0.67% | 0.92% |
+      |            R2 Score | 0.90  | 0.83  | 0.87  |
+      | R2 Score (ajustado) | 0.90  | 0.83  | 0.86  |
+
+9. Comparamos a curva dos dados reais da __série IBC-BR__ versus a curva de valores previstos pelo modelo LSTM.
+
+      ![Comparativo entre valor real versus valor previsto para a série IBC-BR](imagens/analise_predicao_serie_lstm_curva_de_predicao_vs_serie_ibc-br.png)
 
 ## Conclusão
 
