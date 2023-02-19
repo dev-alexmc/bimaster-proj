@@ -184,7 +184,7 @@ A primeira parte do processo, descrita abaixo, tinha como objetivo calibrar os p
 
       ![Comparativo entre valor previsto e o valor real para os conjuntos de treino, validação e teste](imagens/analise_predicao_serie_lstm_pred_vs_real_treino_validacao_teste.png)
 
-      Nessa análise, os pontos pareciam bastante próximos à reta x = y, o que era o esperado.
+      Nessa análise, os pontos pareciam bastante próximos à reta $x = y$, o que era o esperado.
 
 8. Calculamos e avaliamos o erro encontrado no modelo usando as métricas MSE (_mean squared error_, que também foi usada para nortear o treinamento), RMSE (_root mean squared error_), MAPE (_Mean Absolute Percentual Error_), $R^2$ _score_ e $R^2$ _score_ ajustado.
 
@@ -234,7 +234,7 @@ Após encontrar um tamanho de janela deslizante adequado, de definir a topologia
 
       ![Comparativo entre valor previsto e o valor real para os conjuntos de treino, validação e teste](imagens/analise_predicao_serie_lstm_det_anon_pred_vs_real_treino_validacao_teste.png)
 
-      Nessa análise, os pontos pareciam bastante próximos à reta x = y, o que era o esperado.
+      Nessa análise, os pontos pareciam bastante próximos à reta $x = y$, o que era o esperado.
 
 8. Calculamos e avaliamos o erro encontrado no modelo usando as métricas MSE (_mean squared error_, que também foi usada para nortear o treinamento), RMSE (_root mean squared error_), MAPE (_Mean Absolute Percentual Error_), $R^2$ _score_ e $R^2$ _score_ ajustado.
 
