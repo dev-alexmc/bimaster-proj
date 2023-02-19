@@ -1,6 +1,6 @@
 # Projeto final do curso BI-MASTER 2020-2.
 Repositório: bimaster-proj  
-Autor: Alex Marques Campos
+Autor: Alex Marques Campos  
 Matrícula: 202190054
 
 ## Descrição
@@ -115,31 +115,31 @@ Iniciamos o processo carregando e verificando os dados de cada uma das séries t
 
 O seguinte processo foi seguido para realizar a detecção de anomalias com o método _z-score_ modificado.
 
-1. Calculamos o z-score modificado de cada entrada dos resíduos da __série IBC-BR__.
-2. Analisamos os dados de z-score modificado obtidos para as entradas da __série IBC-BR__.
-3. Filtramos os dados dos resíduos da __série IBC-BR__ de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD (sigla em inglês para o desvio absoluto mediano).
+1. Calculamos o _z-score_ modificado de cada entrada dos resíduos da __série IBC-BR__.
+2. Analisamos os dados de _z-score_ modificado obtidos para as entradas da __série IBC-BR__.
+3. Filtramos os dados dos resíduos da __série IBC-BR__ de forma que restassem apenas os que possuíam _z-score_ modificado maior ou menor que 2.5 unidades de MAD (sigla em inglês para o desvio absoluto mediano).
 
-      ![Anomalias encontradas nos resíduos da série IBC-BR via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_res_filtrados_zscore_modificado.png)
+      ![Anomalias encontradas nos resíduos da série IBC-BR via _z-score_ modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_res_filtrados_zscore_modificado.png)
       
-      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de resíduos via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_res_filtrados_zscore_modificado_grafico.png)
+      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de resíduos via _z-score_ modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_res_filtrados_zscore_modificado_grafico.png)
       
       O processo detectou anomalias em 2008 e 2009 (potenciais efeitos da crise do mercado financeiro mundial de 2008) e também encontrou anomalias entre dezembro de 2019 até junho de 2020 (potenciais efeitos da pandemia de COVID-19).
-4. Para compararmos os resultados com outra abordagem, calculamos o z-score modificado de cada entrada da __série de diferenças__.
-5. Analisamos os dados de z-score modificado obtidos para as entradas da __série de diferenças__.
-6. Filtramos os dados da __série de diferenças__ de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 2.5 unidades de MAD.
+4. Para compararmos os resultados com outra abordagem, calculamos o _z-score_ modificado de cada entrada da __série de diferenças__.
+5. Analisamos os dados de _z-score_ modificado obtidos para as entradas da __série de diferenças__.
+6. Filtramos os dados da __série de diferenças__ de forma que restassem apenas os que possuíam _z-score_ modificado maior ou menor que 2.5 unidades de MAD.
 
       ![Anomalias encontradas na série de diferenças com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado.png)
       
-      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via z-score modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_grafico.png)
-7. Para entender melhor as anomalias encontradas, filtramos os dados da __série de diferenças__ de forma que restassem apenas os que possuíam z-score modificado maior ou menor que 3.5 unidades de MAD, de forma que menos anomalias fossem indicadas.
+      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via _z-score_ modificado com limiar 2.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_grafico.png)
+7. Para entender melhor as anomalias encontradas, filtramos os dados da __série de diferenças__ de forma que restassem apenas os que possuíam _z-score_ modificado maior ou menor que 3.5 unidades de MAD, de forma que menos anomalias fossem indicadas.
 
       ![Anomalias encontradas na série de diferenças com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5.png)
       
-      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via z-score modificado com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5_grafico.png)
+      ![Gráfico da série IBC-BR original com as anomalias identificadas na série de diferenças via _z-score_ modificado com limiar 3.5](imagens/analise_estatistica_ibc-br_diferencas_filtrados_zscore_modificado_limiar_3_5_grafico.png)
 
       As anomalias encontradas analisando apenas a série de diferenças são muito diferentes das anomalias que entendemos existirem nos dados. Verificamos que a série de diferenças, apesar de ser uma série estacionária, ainda carrega em si a modulação da sazonalidade e isso é refletido nas em grandes diferenças entre valores consecutivos, o que influencia o processo de detecção de anomalias. 
       
-      Avaliamos que o processo de detecção de anomalias na série de diferenças é útil para detectar grandes variações entre valores consecutivos da série, mas não se mostrou tão útil para detectar anomalias no escopo semântico da série (momentos em que a série se comportou de maneira inesperada com relação à sua proposta), quando comparamos os resultados obtidos com o z-score modificado na série de resíduos.
+      Avaliamos que o processo de detecção de anomalias na série de diferenças é útil para detectar grandes variações entre valores consecutivos da série, mas não se mostrou tão útil para detectar anomalias no escopo semântico da série (momentos em que a série se comportou de maneira inesperada com relação à sua proposta), quando comparamos os resultados obtidos com o _z-score_ modificado na série de resíduos.
 
 #### Método: CUMSUM (somas cumulativas)
 
@@ -155,47 +155,122 @@ O seguinte processo foi seguido para realizar a detecção de anomalias com o m�
 
       A série de diferenças não foi analisada via o método CUMSUM, pois a análise desta série via o método _z-score_ modificado revelou que os dados nela contidos não apresentavam as anomalias nas quais estávamos interessados.
 
-      Das cinco anomalias encontradas via o método CUMSUM com limiar 0.8, quatro delas também foram detectadas pelo método z-score modificado, que encontrou um total de 10 anomalias com limiar 2.5 unidades.  
+      Das cinco anomalias encontradas via o método CUMSUM com limiar 0.8, quatro delas também foram detectadas pelo método _z-score_ modificado, que encontrou um total de 10 anomalias com limiar 2.5 unidades.  
 
-### Via predição de séries com modelo LSTM
+### Via predição de séries com o modelo LSTM
 
 Arquivo: [ibc_br_da_predicao_de_series.ipynb](ibc_br_da_predicao_de_series.ipynb)
 
-Nesta seção, apresentamos uma abordagem diferente para a detecção de anomalias em séries temporais, através do uso de um modelo de inteligência artificial para realizar a predição de valores da série temporal. O racional é que um modelo treinado com dados regulares da série temporal (valores que não representem anomalias) prediria valores regulares para momentos onde anomalias ocorressem. Quando um valor anômalo ocorresse na série, o modelo apresentaria um erro muito grande quando comparássemos o valor previsto e o valor real e isso seria o indicativo que uma anomalia ocorreu.
+Nesta seção, apresentamos uma abordagem diferente para a detecção de anomalias em séries temporais, através do uso de um modelo de inteligência artificial para realizar a predição de valores da série temporal. O racional é que um modelo treinado com dados regulares da série temporal (valores que não representem anomalias) prediria valores regulares para momentos onde anomalias ocorressem nos dados reais. Quando um valor anômalo ocorresse na série, o modelo treinado prediria um valor contendo um erro muito grande quando comparássemos o valor previsto e o valor real - isso seria o indicativo que uma anomalia ocorreu nos dados reais.
 
 O modelo proposto para esse processo é uma rede neural com camadas LSTM (_Long Short Term Memory_), uma arquitetura de rede neural recorrente (RNN, do _inglês recurrent neural network_) que _costuma_ apresentar bom desempenho em tarefas de predição de séries temporais.
 
-O processo seguido foi o descrito abaixo:
+A primeira parte do processo, descrita abaixo, tinha como objetivo calibrar os parâmetros do modelo (principalmente a topologia da rede) e outros aspectos de treinamento, como o tamanho da segregação em batch, o número de épocas necessária etc. Também acabamos explorando diferentes tamanhos das janelas deslizantes.
+
+#### Processo da primeira fase: encontrando e calibrando parâmetros da entrada, do modelo e do treinamento
 
 1. Carregamos e verificamos os dados da [série IBC-BR](dados/serie_ibcbr.csv).
-2. Normalizamos os valores, para evitar que o modelo fosse influenciado por grandes valores absolutos (mas também fizemos testes com os dados originais, sem estarem normalizados).
-3. Separamos os dados em conjuntos usando janelas deslizantes e também um valor alvo, o imediatamente após o final da janela - este é o valor a ser previsto pelo modelo.
+2. Normalizamos os valores, para evitar que o modelo fosse enviesado por grandes valores absolutos (mas também fizemos testes com os dados originais, sem estarem normalizados).
+3. Separamos os dados em conjuntos, usando janelas deslizantes e também um valor alvo, o imediatamente após o final da janela - este é o valor a ser previsto pelo modelo.
 4. Separamos os dados em conjuntos de treinamento, validação e testes.
 5. Criamos um modelo LSTM e o treinamos usando os dados de treinamento, validação e testes.
 
       ![Histórico de treinamento do modelo LSTM](imagens/analise_predicao_serie_lstm_hist_treinamento.png)
 
-      Durante o treinamento, monitoramos o desempenho das predições realizadas pelo modelo frente ao conjunto de validação e ajustamos automaticamente a taxa de aprendizado, para refinar os resultados. O processo também foi interrompido antes do final do total de épocas quando o erro estabilizou. A métrica utilizada para calcular o erro da função objetivo foi o MSE (_mean squared error_).
+      Durante o treinamento, monitoramos o desempenho das predições realizadas pelo modelo frente ao conjunto de validação e ajustamos automaticamente a taxa de aprendizado, para refinar o treinamento. O processo também foi interrompido antes do final do total de épocas quando foi detectado que o erro calculado estabilizou. A métrica utilizada para calcular o erro da função objetivo foi o MSE (_mean squared error_).
 
-6. Verificamos, pelo histórico de treinamento se houve ou não __over training__.
+6. Verificamos, pelo histórico de treinamento se houve ou não __overtraining__.
 7. Analisamos a relação entre os valores previstos e os valores reais para os conjuntos de treinamento, validação e testes.
 
       ![Comparativo entre valor previsto e o valor real para os conjuntos de treino, validação e teste](imagens/analise_predicao_serie_lstm_pred_vs_real_treino_validacao_teste.png)
 
-      Nessa análise, os pontos pareciam bastante próximos à reta x = y.
+      Nessa análise, os pontos pareciam bastante próximos à reta x = y, o que era o esperado.
 
-8. Calculamos e avaliamos o erro encontrado no modelo usando as métricas MSE (que também foi usada para nortear o treinamento), RMSE (_root mean squared error_), MAPE (_Mean Absolute Percentual Error_), R^2 score e R^2 ajustado. 
+8. Calculamos e avaliamos o erro encontrado no modelo usando as métricas MSE (_mean squared error_, que também foi usada para nortear o treinamento), RMSE (_root mean squared error_), MAPE (_Mean Absolute Percentual Error_), $R^2$ _score_ e $R^2$ _score_ ajustado.
 
-      |     Métrica de Erro | Train |  Val  | Test  |
-      |                 MSE | 0.09  | 0.17  | 0.14  |
-      |                RMSE | 0.31  | 0.41  | 0.38  |
-      |                MAPE | 0.64% | 0.67% | 0.92% |
-      |            R2 Score | 0.90  | 0.83  | 0.87  |
-      | R2 Score (ajustado) | 0.90  | 0.83  | 0.86  |
+|     Métrica de Erro | Treino |  Validação  | Teste  |
+|---------------------|--------|-------------|--------|
+|                 MSE |   0.09 |        0.17 |   0.14 |
+|                RMSE |   0.31 |        0.41 |   0.38 |
+|                MAPE |  0.64% |       0.67% |  0.92% |
+|            R2 Score |   0.90 |        0.83 |   0.87 |
+| R2 Score (ajustado) |   0.90 |        0.83 |   0.86 |
 
 9. Comparamos a curva dos dados reais da __série IBC-BR__ versus a curva de valores previstos pelo modelo LSTM.
 
       ![Comparativo entre valor real versus valor previsto para a série IBC-BR](imagens/analise_predicao_serie_lstm_curva_de_predicao_vs_serie_ibc-br.png)
 
-## Conclusão
+Aqui cabe um comentário sobre os diferentes parâmetros que foram avaliados no processo exploratório:
 
+   * __Normalização__: Testamos o MinMaxScaler, do sklearn, implementamos um normalizador personalizado, que chamamos de StandardScaler, e também testamos o processo sem normalizar os dados. No final, foi mantido o uso do StandardScaler para normalizar os dados.
+   * __Janela deslizante__ dos dados de entrada: Testamos janelas deslizantes de 24 (chute inicial do que seria uma janela adequada), 36, 48, 60, 7, 6, 3, 2 e 1. Incrivelmente, a janela com os melhores resultados foi a de 1 unidade.
+   * __Topologia__ da rede neural: 
+      * Sempre utilizamos uma camada de _dropout_ após as camadas LSTM ou _dense_ (exceto a camada _dense_ final), para deixar o modelo mais resiliente, mas também testamos topologias com uma camada LSTM, com uma camada LSTM e uma camada _dense_ adicional (totalmente conectada) e com duas camadas LSTM e uma camada _dense_ adicional. A topologia que gerou melhores resultados foi a com uma camada LSTM (seguida de camada de _dropout_) e da camada _dense_ final, mas sem camadas intermediárias adicionais.
+      * Variamos o número de unidades nas camadas LSTM e _dense_ intermediárias entre 1, 2, 4, 8, 12, 24, 36, 60, 100, 120, 240. A quantidade de unidades que gerou melhores resultados foram 120 unidades.
+      * Variamos o _dropout_ entre 10% e 20% e mantivemos o uso de 20% de _dropout_.
+   * __Treinamento__:
+      * Variamos o otimizador entre o SGD (_stochastic gradient descent_) e o Adam (uma variante do SGD) e optamos pelo uso do Adam.
+      * Variamos o tamanho do _batch_ (quantidade de entradas apresentadas ao modelo em uma dada iteração do treinamento) entre o conjunto total, 200, 100 e 50. Avaliamos que o uso de um _batch_ com tamanho 50 apresentou melhores resultados, por isso foi o utilizado.
+      * Avaliamos o uso de conjunto de validação entre 5%, 10%, 15% e 20% do total de entradas disponíveis. Escolhemos a proporção de 15%.
+      * Avaliamos o uso de conjunto de teste entre 5%, 10%, 15% e 20% do total de entradas disponíveis. Escolhemos a proporção de 15%.
+      * Avaliamos quantidades de épocas entre 100, 200, 300, 400, 600 e 800. Escolhemos 800 como o número de épocas adequado (principalmente porque estávamos utilizando o callback EarlyStopping do Keras e avaliando situação de _overtraining_ no resultado do treinamento).
+      * Avaliamos diversos parâmetros dos callbacks de treinamento Keras ReduceLROnPlateau e EarlyStopping, principalmente os critérios que detectam a estabilidade nos dados de treinamento.
+
+A maior parte do esforço foi aplicado nessa primeira fase e a percepção foi que a pequena quantidade de dados de entrada acabou sendo um grande limitador no processo de treinamento do modelo de IA. Talvez fosse possível obter resultados melhores caso houvesse mais dados disponíveis.
+
+#### Processo da segunda fase: Encontrando anomalias nos dados
+
+Após encontrar um tamanho de janela deslizante adequado, de definir a topologia e os parâmetros do modelo e do treinamento, estávamos prontos para treinar um novo modelo que fosse capaz de encontrar anomalias nos dados, para isso seguimos o processo descrito abaixo:
+
+1. Obtivemos os índices das anomalias encontradas via o uso do _z-score_ modificado na __série de resíduos da série IBC-BR__, pois esse método foi o que apresentou o melhor desempenho até então.
+2. Criamos uma cópia dos dados da __série IBC-BR__ e removemos da série todas as anomalias listadas no passo (1), de forma que o conjunto de entrada só contivesse dados regulares.
+3. Normalizamos os valores da série criada em (2) utilizando o normalizador personalizado que escrevemos, chamado StandardScaler.
+4. Separamos os dados da série em conjuntos de treinamento, validação (15%) e teste (15%) utilizando uma janela deslizante de tamanho 1.
+5. Criamos um modelo com a topologia escolhida (uma camada LSTM de 120 unidades com _dropout_ de 20% e utilizando o otimizador Adam).
+6. Treinamos o modelo com um _batch_ de 50 elementos por 800 épocas (mas nos fazendo valer do callback de parada antecipada do treinamento).  
+      ![Histórico de treinamento do modelo LSTM](imagens/analise_predicao_serie_lstm_det_anom_hist_treinamento.png)
+7. Verificamos, pelo histórico de treinamento se houve ou não __overtraining__.
+8. Analisamos a relação entre os valores previstos e os valores reais para os conjuntos de treinamento, validação e testes.
+
+      ![Comparativo entre valor previsto e o valor real para os conjuntos de treino, validação e teste](imagens/analise_predicao_serie_lstm_det_anon_pred_vs_real_treino_validacao_teste.png)
+
+      Nessa análise, os pontos pareciam bastante próximos à reta x = y, o que era o esperado.
+
+8. Calculamos e avaliamos o erro encontrado no modelo usando as métricas MSE (_mean squared error_, que também foi usada para nortear o treinamento), RMSE (_root mean squared error_), MAPE (_Mean Absolute Percentual Error_), $R^2$ _score_ e $R^2$ _score_ ajustado.
+
+|     Métrica de Erro | Treino |  Validação  | Teste  |
+|---------------------|--------|-------------|--------|
+|                 MSE |   0.11 |        0.10 |   0.06 |
+|                RMSE |   0.33 |        0.32 |   0.25 |
+|                MAPE |  1.86% |       0.67% |  0.66% |
+|            R2 Score |   0.88 |        0.90 |   0.95 |
+| R2 Score (ajustado) |   0.88 |        0.89 |   0.95 |
+
+9. Utilizamos o modelo treinado para fazer previsões de valores para a __série IBC-BR__ (original) e calculamos a diferença percentual absoluta entre o valor real e o valor previsto, ponderado pelo valor real. Esse valor será usado para detectar as anomalias.
+10. Excluímos dos dados originais os dados que representam a primeira janela deslizante, pois não há previsão para estes.
+11. Verificamos a distribuição do erro percentual nos dados previstos.
+
+|Propriedade|Valor     |
+|-----------|----------|
+|  __count__|235.000000|
+|  __mean__ |  2.616567|
+|  __std__  |  2.334002|
+|  __min__  |  0.003477|
+|  __25%__  |  0.911211|
+|  __50%__  |  2.126614|
+|  __75%__  |  3.600360|
+|  __max__  | 15.235861|
+
+12. Calculamos o quantil de 98% do erro percentual dos dados (8.5355%), com a premissa de que 2% dos dados seriam anomalias (mas poderíamos ter usado o valor de 4%, pois o _z-score_ modificado encontrou 10 anomalias em 236 entradas).
+13. Filtramos os resultados (valores reais e previstos) onde o erro percentual absoluto ponderado pelo valor real era maior do que o limiar definido (quantil de 98%) e encontramos o que seriam 5 anomalias nos dados.
+
+      ![Anomalias encontradas com um limiar de 98% do quantil dos erros de previsão](imagens/analise_predicao_serie_lstm_det_anom_anomalias.png)
+
+14. Comparamos as previsões feitas pelo modelo LSTM e os respectivos erros percentuais, para os valores contidos nos índices identificados pelo __z-score__ modificado.
+
+      ![Comparativo das previsões e dos erros de previsão do modelo LSTM nos índices identificados como anomalias pelo método do _z-score_ modificado](imagens/analise_predicao_serie_lstm_det_anom_comparativo_anomalias_z-score_mod_vs_erro_modelo.png)
+
+      De todas as anomalias identificadas, apenas a entrada ocorrida em 2020-04-01 também ocorre nas anomalias identificadas pelo método do _z-score_ modificado. Também vemos que, mesmo se considerássemos o valor do quantil de 75% do erro percentual para detectar as anomalias (o que seria bastante agressivo), apenas 4 das 10 anomalias identificadas pelo _z-score_ modificado seriam encontradas (valores que possuem um erro percentual absoluto ponderado maior que 3.600360%).
+
+## Conclusão
+   FIXME: a fazer.
