@@ -273,4 +273,15 @@ Após encontrar um tamanho de janela deslizante adequado, de definir a topologia
       De todas as anomalias identificadas, apenas a entrada ocorrida em 2020-04-01 também ocorre nas anomalias identificadas pelo método do _z-score_ modificado. Também vemos que, mesmo se considerássemos o valor do quantil de 75% do erro percentual para detectar as anomalias (o que seria bastante agressivo), apenas 4 das 10 anomalias identificadas pelo _z-score_ modificado seriam encontradas (valores que possuem um erro percentual absoluto ponderado maior que 3.600360%).
 
 ## Conclusão
-   FIXME: a fazer.
+
+No presente trabalho, utilizamos diversos métodos para realizar a detecção de anomalias em séries temporais, a saber: _z-score_ modificado, CUMSUM (soma cumulativa) e predição de séries via modelo de inteligência artificial LSTM. Em especial, utilizamos uma série temporal com poucas amostras e cuja tendência é não linear - estes aspectos foram fatores de dificuldade adicionais. 
+
+Para alcançar o objetivo pretendido, realizamos a análise dos dados da série e seu tratamento. Criamos uma série derivada, da diferença dos elementos consecutivos da série, para superar a dificuldade da série original não ser estacionária (requisito para alguns dos métodos). Também decompusemos a série original e tentatamos detectar as anomalias em seu resíduo (o que não é parte da tendência nem da sazonalidade). Tivemos bastante sucesso com os métodos de detecção de anomalias, mas o uso da série de diferenças não se mostrou promissor ao tipo de anomalia que procurávamos.
+
+Os métodos estatísticos (_z-score_ modificado e CUMSUM) são os de mais fácil aplicação, apesar da necessidade de que a série original seja decomposta primeiro, para que se obtenha o resíduo da série. O modelo de inteligência artificial LSTM foi o mais complexo de ser utilizado para que se pudesse obter resultados adequados.
+
+Para séries com poucas amostras, todos os métodos são adequados tanto para o processamento _online_ quanto para processamento em _batch_. Para séries com muitas amostras, os métodos estatísticos continuam adequados para o processamento _online_ ou em _batch_, mas o método de predição de série temporal pode apresentar dificuldades para uso em processamento _online_, dependendo da frequência e dos custos computacionais envolvidos no treinamento do modelo.
+
+De todos os métodos, um se destacou em nossa avaliação: o **_z-score_ modificado aplicado no resíduo da série IBC-BR** foi o que apresentou os melhores resultados na detecção de anomalias e a melhor relação de custo/benefício em sua aplicação para esse objetivo.
+
+Talvez o método de predição de série temporal apresentasse resultados melhores com um maior volume de dados de entrada, com uma topologia ligeiramente diferente ou até com o uso de outro modelo para a predição.
