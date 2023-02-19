@@ -284,4 +284,4 @@ Para séries com poucas amostras, todos os métodos são adequados tanto para o 
 
 De todos os métodos, um se destacou em nossa avaliação: o **_z-score_ modificado aplicado no resíduo da série IBC-BR** foi o que apresentou os melhores resultados na detecção de anomalias e a melhor relação de custo/benefício em sua aplicação para esse objetivo.
 
-Talvez o método de predição de série temporal apresentasse resultados melhores com um maior volume de dados de entrada, com uma topologia ligeiramente diferente ou até com o uso de outro modelo para a predição.
+Talvez o método de predição de série temporal apresentasse resultados melhores com um maior volume de dados de entrada, com uma topologia ligeiramente diferente ou até com o uso de outro modelo para a predição. Deixamos essa avaliação para um trabalho subsequente.
