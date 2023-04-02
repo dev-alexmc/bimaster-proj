@@ -1,11 +1,13 @@
-# Projeto final do curso BI-MASTER 2020-2.
+# Projeto Final ('PROJ') - BI MASTER 2020.2
+## Detecção de Anomalias em Série Temporal
 Repositório: bimaster-proj  
 Autor: Alex Marques Campos  
 Matrícula: 202190054
 
 ## Descrição
-O presente projeto tem como finalidade servir como projeto de final do curso BI-MASTER, da turma 2020-2, para o aluno Alex Marques Campos.
-A proposta do projeto é realizar uma atividade de análise de anomalias em uma série história com poucas amostras, para explorar a dificuldade da análise em uma série deste tipo e as ferramentas que podem ser utilizadas para a detecção de anomalias. A hipótese é que a detecção de anomalias seria feita em um processo batch, dado que série possui uma baixa frequência, mas também exploraremos abordagens para permitir estabelecer um processo de deteção de anomalias 'stream-like'.
+Este projeto visa realizar a atividade de detecção de anomalias em uma série temporal com poucas amostras, visando explorar a dificuldade de trabalhar com uma série deste tipo e algumas das ferramentas que podem ser utilizadas neste cenário. A hipótese é que a detecção de anomalias seja feita em um processo _batch_, mas também exploraremos abordagens para permitir estabelecer um processo de deteção de anomalias '_stream-like_'.
+
+Este é o projeto final do curso de pós-graduação 'BI MASTER', turma 2020.2, do aluno Alex Marques Campos.
 
 ## Sobre a série temporal escolhida
 Por ser utilizada como parte do processo de avaliação de desempenho de alguns produtos do BNDES, selecionamos a série IBC-BR para ser o foco da análise. Essa série mede o desempenho da economia do país, mês a mês. Tal índice é produzido pelo Banco Central do Brasil e está disponível no portal de dados abertos do BACEN ([IBC-BR](https://dadosabertos.bcb.gov.br/dataset/24363-indice-de-atividade-economica-do-banco-central---ibc-br)). Os dados são gerados a partir de 2003 e, em novembro de 2022, a série possuía 236 valores.
@@ -27,7 +29,7 @@ Processo de análise:
 - Verificamos que as anomalias parecem estar contidas no resíduo.
 - Analisamos a distribuição dos dados e identificamos que a maioria deles está contida na faixa entre 120 e 140.
 - Analisamos as propriedades estatísticas que definem se a série é ou não estacionária (propriedade que desejamos, para poder aplicar alguns métodos na fase de análise de anomalias) e vimos que apenas a sazonalidade e o resíduo da série IBC-BR são estacionárias.
-- Como o processo de decomposição da série poderia ser um problema em uma abordagem de detecção de anomalias "stream-like" e a série IBC-BR não era estacionária, decidimos construir uma série derivada, calculando as diferenças entre valores subsequentes na série original e analisar seus resultados.
+- Como o processo de decomposição da série poderia ser um problema em uma abordagem de detecção de anomalias '_stream-like_' e a série IBC-BR não era estacionária, decidimos construir uma série derivada, calculando as diferenças entre valores subsequentes na série original e analisar seus resultados.
 - Construímos a série de diferenças e verificamos propriedades básicas dos dados (quantidades, estatísticas, presença de valores nulos, etc.)
 - Comparamos visualmente as série IBC-BR original e a série de diferenças e avaliamos que a série de diferenças captura as mudanças de comportamento da série original e que parecia estacionária, sendo um provável proxy da série original para um processo de detecção de anomalias.
 
@@ -80,7 +82,7 @@ Após analisarmos a série histórica do IBC-BR, vemos que:
 - A série histórica do IBC-BR não é estacionária.
 - A tendência da série histórica do IBC-BR não é linear.
 - Aparentemente, as anomalias da série histórica do IBC-BR podem ser encontradas no resíduo da série, após sua decomposição.
-- Uma nova série histórica pode ser derivada da série IBC-BR fazendo a diferença de valores consecutivos da série original (doravante chamaremos esta série de "série de diferenças").
+- Uma nova série histórica pode ser derivada da série IBC-BR fazendo a diferença de valores consecutivos da série original (doravante chamaremos esta série de 'série de diferenças').
 - A série de diferenças é estacionária.
 - Aparentemente, as anomalias da série original ainda podem ser encontradas na série de diferenças.
 - Como a série de diferenças também é estacionária, esta poderá ser analisada por métodos estatísticos para tentarmos identificar as anomalias nos dados.
@@ -95,7 +97,7 @@ Ao final do processo de análise dos dados, persistimos as séries de interesse 
 3. [serie_ibcbr_diferencas.csv](dados/serie_ibcbr_diferencas.csv) : dados da série de diferenças.
 4. [serie_ibcbr_diferencas_residuo.csv](dados/serie_ibcbr_diferencas_residuo.csv) : dados do componente de resíduos da série de diferenças.
 
-Os dados foram persistidos sem os valores inválidos (NaN), e com o nome do índice e da coluna valorada padronizados como "data" e "valor", respectivamente. Esses dados serão usados na próxima etapa, de detecção de anomalias.
+Os dados foram persistidos sem os valores inválidos (NaN), e com o nome do índice e da coluna valorada padronizados como 'data' e 'valor', respectivamente. Esses dados serão usados na próxima etapa, de detecção de anomalias.
 
 ## Detecção de Anomalias
 
